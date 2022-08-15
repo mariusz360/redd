@@ -135,7 +135,7 @@ module Redd
       # @param query [String] the search query
       # @param params [Hash] refer to {Searchable} to see search parameters
       # @see Searchable#search
-      def search(query, **params)
+      def search(query, params)
         restricted_params = { restrict_to: read_attribute(:display_name) }.merge(params)
         super(query, restricted_params)
       end
