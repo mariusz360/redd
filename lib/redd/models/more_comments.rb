@@ -9,8 +9,8 @@ module Redd
       # Expand the object's children into a listing of Comments and MoreComments.
       # @param link [Submission] the submission the object belongs to
       # @return [Listing<Comment, MoreComments>] the expanded children
-      def expand(link:)
-        expand_recursive(link: link, lookup: {})
+      def expand(submission)
+        expand_recursive(submission, {})
       end
 
       # @return [Array<String>] an array representation of self
@@ -49,7 +49,7 @@ module Redd
       # @param link [Submission] the object's submission
       # @param lookup [Hash] a hash of comments to add future replies to
       # @return [Array<Comment, MoreComments>] the expanded comments or self if past depth
-      def expand_recursive(link:, lookup:)
+      def expand_recursive(submission, lookup)
         return [self] if depth == 0
 
         expand_one(link: link).each_with_object([]) do |thing, coll|
